@@ -4,7 +4,70 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ProductCard from "./components/ProductCard";
 
+const productsRaw = [
+  {
+    imageUrl:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoFVoDMgB1hVanp6W49bZW2Y5JExq2AFV5Yg&s",
+    altImage: "HEMLINGBY",
+    name: "HEMLINGBY",
+    price: 1995000,
+    stock: 24,
+  },
+  {
+    imageUrl:
+      "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/772/0977232_PE813475_S3.jpg",
+    altImage: "ADILS",
+    name: "ADILS/LINNMON",
+    price: 499000,
+    stock: 10,
+  },
+  {
+    imageUrl:
+      "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/438/1243810_PE920959_S4.jpg",
+    altImage: "GRÖNSTA",
+    name: "GRÖNSTA",
+    price: 1495000,
+    stock: 7,
+  },
+  {
+    imageUrl:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSL5Hdnh4JAJ5KO7kUEVQPs7MkNbYccvDJz-A&s",
+    altImage: "ALEX/LAGKAPTEN",
+    name: "ALEX/LAGKAPTEN",
+    price: 2089000,
+    stock: 4,
+  },
+  {
+    imageUrl:
+      "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/465/0246565_PE385541_S5.jpg",
+    altImage: "LACK",
+    name: "LACK",
+    price: 1299000,
+    stock: 10,
+  },
+  {
+    imageUrl:
+      "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/093/0609306_PE684440_S5.jpg",
+    altImage: "TERTIAL",
+    name: "TERTIAL",
+    price: 149000,
+    stock: 143,
+  },
+];
+
 function App() {
+  const products = productsRaw.map((product) => {
+    return (
+      <ProductCard
+        imageUrl={product.imageUrl}
+        altImage={product.altImage}
+        name={product.name}
+        price={product.price}
+        stock={product.stock}
+      />
+    );
+  });
+
   return (
     <>
       <Header />
@@ -18,9 +81,11 @@ function App() {
             room into a conversation starter.
           </p>
         </div>
+        {/* <Box order="1" name="Jenis"/>
+        <Box order="2" name="Jumlah"/>
+        <Box order="3" name="Harga"/> */}
 
-        <ProductCard/>
-
+        <div className="grid grid-cols-2 gap-4">{products}</div>
       </main>
       <Footer />
     </>
