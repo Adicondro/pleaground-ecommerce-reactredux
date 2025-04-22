@@ -56,6 +56,7 @@ const productsRaw = [
 ];
 
 function App() {
+
   const products = productsRaw.map((product) => {
     return (
       <ProductCard
@@ -67,6 +68,8 @@ function App() {
       />
     );
   });
+
+  
 
   return (
     <>
@@ -81,9 +84,6 @@ function App() {
             room into a conversation starter.
           </p>
         </div>
-        {/* <Box order="1" name="Jenis"/>
-        <Box order="2" name="Jumlah"/>
-        <Box order="3" name="Harga"/> */}
 
         <div className="grid grid-cols-2 gap-4">{products}</div>
       </main>
