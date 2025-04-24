@@ -1,11 +1,12 @@
 import React from "react";
+import { Button } from "./ui/button";
 
 const ContactMeButton = ({label, children}) => {
   return (
-    <button className="bg-gray-900 text-white p-2 rounded-md">
+    <Button className="bg-gray-900 text-white p-2 rounded-md">
       {/* {label} */}
       {children}
-    </button>
+    </Button>
   );
 };
 

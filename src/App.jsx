@@ -43,7 +43,7 @@ const productsRaw = [
     altImage: "LACK",
     name: "LACK",
     price: 1299000,
-    stock: 10,
+    stock: 0,
   },
   {
     imageUrl:

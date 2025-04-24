@@ -1,12 +1,23 @@
 import React from "react";
 import { Button } from "./ui/button";
 import { IoIosAdd, IoIosRemove } from "react-icons/io";
+import { useState } from "react";
 
-const ProductCard = ({ imageUrl, altImage, name, price, stock }) j=> {
+const ProductCard = ({ imageUrl, altImage, name, price, stock }) => {
   // const { imageUrl, altImage, name, price, stock } = props;
 
-  const addToCart = () => {
-    alert("Added to Cart");
+  const [quantity, setQuantity] = useState(0);
+
+  const incrementQuantity = () => {
+    if (quantity < stock) {
+      setQuantity(quantity + 1);
+    }
+  };
+
+  const decrementQuantity = () => {
+    if (quantity > 0) {
+      setQuantity(quantity - 1);
+    }
   };
 
   return (
@@ -30,19 +41,31 @@ const ProductCard = ({ imageUrl, altImage, name, price, stock }) j=> {
       <div className="flex flex-col gap-2">
         {/* Quantity */}
         <div className="flex justify-between items-center">
-          <Button size={"icon"} variant={"ghost"}>
+          <Button
+            disabled={quantity <= 0}
+            onClick={decrementQuantity}
+            size={"icon"}
+            variant={"ghost"}
+          >
             <IoIosRemove className="h-6 w-6" />
           </Button>
 
-          <p className="text-lg font-bold">0</p>
+          <p className="text-lg font-bold">{quantity}</p>
 
-          <Button size={"icon"} variant={"ghost"}>
+          <Button
+            disabled={quantity >= stock}
+            onClick={incrementQuantity}
+            size={"icon"}
+            variant={"ghost"}
+          >
             <IoIosAdd className="h-6 w-6" />
           </Button>
         </div>
         {/* Add to Cart */}
-        <Button onClick={addToCart} className="w-full">
-          Add to cart
+        <Button disabled={!Boolean(stock)} className="w-full">
+          {
+            stock > 0 ? "Add to cart" : "Out of stock"
+          }
         </Button>
       </div>
     </div>
