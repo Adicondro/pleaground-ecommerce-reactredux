@@ -3,12 +3,15 @@ import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { IoCart, IoHeart } from "react-icons/io5";
 import { Separator } from "./ui/separator";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
     <header className="h-16 border-b flex items-center justify-between px-8">
       {/* BRAND */}
-      <p className="text-2xl font-bold hover:cursor-pointer">Pleaground</p>
+      <Link to="/">
+        <p className="text-2xl font-bold hover:cursor-pointer">Pleaground</p>
+      </Link>
 
       {/* Search Bar */}
       <Input className="max-w-[600px]" placeholder="Search Products.."></Input>
@@ -16,9 +19,11 @@ const Header = () => {
       {/* Buttons */}
       <div className="flex space-x-4 h-5 items-center">
         <div className="flex space-x-2">
-          <Button variant={"ghost"} size={"icon"}>
-            <IoCart className="h-6 w-6" />
-          </Button>
+          <Link to="/cart">
+            <Button variant={"ghost"} size={"icon"}>
+              <IoCart className="h-6 w-6" />
+            </Button>
+          </Link>
           <Button variant={"ghost"} size={"icon"}>
             <IoHeart className="h-6 w-6" />
           </Button>
