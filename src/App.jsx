@@ -9,7 +9,7 @@ import LoginPage from "./pages/LoginPage";
 
 function App() {
   return (
-    <>outube.com
+    <>
     
       <Header />
       <Routes>
