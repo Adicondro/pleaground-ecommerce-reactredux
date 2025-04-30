@@ -14,11 +14,23 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   Form,
+  FormDescription,
   FormItem,
   FormMessage,
   FormLabel,
   FormField,
+  FormControl,
 } from "@/components/ui/form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const loginFormSchema = z.object({
+  username: z
+    .string()
+    .min(3, "Username has to be 3 characters or more")
+    .max(16, "Username has to be less than 16 characters"),
+  password: z.string().min(8, "Your password needs to be 8 characters or more"),
+});
 
 const LoginPage = () => {
   const form = useForm({
@@ -26,41 +38,63 @@ const LoginPage = () => {
       username: "",
       password: "",
     },
+    resolver: zodResolver(loginFormSchema),
+    reValidateMode: "onChange"
   });
 
-  // const [inputUsername, setInputUsername] = useState("");
-  // const [inputPassword, setInputPassword] = useState("");
+  const handleLogin = (values) => {
+    alert(`Name: ${values.username} Password: ${values.password}`);
+  };
 
   const [isChecked, setIsChecked] = useState(false);
 
   return (
     <main className="px-4 container py-8 flex flex-col justify-center max-w-screen items-center h-[80vh]">
       <Form {...form}>
-        <form className="w-full max-w-[540px]">
+        <form
+          onSubmit={form.handleSubmit(handleLogin)}
+          className="w-full max-w-[540px]"
+        >
           <Card>
             <CardHeader>
               <CardTitle>Welcome Back</CardTitle>
             </CardHeader>
             <CardContent className="flex flex-col gap-2">
               <div>
-                <Label htmlFor="username">Username</Label>
-                <Input
-                  // onChange={(event) => {
-                  //   setInputUsername(event.target.value);
-                  // }}
-                  id="username"
+                <FormField
+                  control={form.control}
+                  name="username"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Username</FormLabel>
+                      <FormControl>
+                        <Input {...field} />
+                      </FormControl>
+                      <FormDescription />
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
               </div>
 
               <div>
-                <Label htmlFor="password">Password</Label>
-                <Input
-                  // onChange={(event) => {
-                  //   setInputPassword(event.target.value);
-                  // }}
-                  id="password"
-                  type={isChecked ? "text" : "password"}
-                ></Input>
+                <FormField
+                  control={form.control}
+                  name="password"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Password</FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          type={isChecked ? "text" : "password"}
+                        />
+                      </FormControl>
+                      <FormDescription />
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
               </div>
 
               <div className="flex items-center space-x-2">
@@ -73,7 +107,7 @@ const LoginPage = () => {
             </CardContent>
             <CardFooter>
               <div className="flex flex-col space-y-4 w-full">
-                <Button>Login</Button>
+                <Button disabled={!form.formState.isValid}>Login</Button>
                 <Button variant="link">Sign up instead</Button>
               </div>
             </CardFooter>
