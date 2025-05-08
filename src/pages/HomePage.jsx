@@ -1,5 +1,7 @@
 import React from "react";
 import ProductCard from "@/components/ProductCard";
+import { Button } from "@/components/ui/button";
+import { axiosInstance } from "@/lib/axios";
 
 const productsRaw = [
   {
@@ -53,17 +55,29 @@ const productsRaw = [
 ];
 
 const HomePage = () => {
-  const products = productsRaw.map((product) => {
-    return (
-      <ProductCard
-        imageUrl={product.imageUrl}
-        altImage={product.altImage}
-        name={product.name}
-        price={product.price}
-        stock={product.stock}
-      />
-    );
-  });
+  const [products, setProducts] = useState([]);
+
+  // const products = productsRaw.map((product) => {
+  //   return (
+  //     <ProductCard
+  //       imageUrl={product.imageUrl}
+  //       altImage={product.altImage}
+  //       name={product.name}
+  //       price={product.price}
+  //       stock={product.stock}
+  //     />
+  //   );
+  // });
+
+  const fetchProducts = async () => {
+    try {
+      const response = await axiosInstance.get("/products");
+      console.log(response.data);
+      setProducts(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <>
@@ -77,6 +91,8 @@ const HomePage = () => {
             room into a conversation starter.
           </p>
         </div>
+
+        <Button onClick={fetchProducts}>Fetch Products</Button>
 
         <div className="grid grid-cols-2 gap-4">{products}</div>
       </main>
