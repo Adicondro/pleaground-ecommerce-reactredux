@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ProductCard from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
 import { axiosInstance } from "@/lib/axios";
+import { useState } from "react";
 
 const productsRaw = [
   {
@@ -55,29 +56,41 @@ const productsRaw = [
 ];
 
 const HomePage = () => {
+  const [productIsLoading, setProductIsLoading] = useState(false);
   const [products, setProducts] = useState([]);
 
-  // const products = productsRaw.map((product) => {
-  //   return (
-  //     <ProductCard
-  //       imageUrl={product.imageUrl}
-  //       altImage={product.altImage}
-  //       name={product.name}
-  //       price={product.price}
-  //       stock={product.stock}
-  //     />
-  //   );
-  // });
+  const productsList = products.map((product) => {
+    return (
+      <ProductCard
+        id={product.id}
+        imageUrl={product.imageUrl}
+        altImage={product.altImage}
+        name={product.name}
+        price={product.price}
+        stock={product.stock}
+      />
+    );
+  });
 
   const fetchProducts = async () => {
+    setProductIsLoading(true);
     try {
       const response = await axiosInstance.get("/products");
       console.log(response.data);
       setProducts(response.data);
     } catch (err) {
       console.log(err);
+    } finally {
+      setProductIsLoading(false);
     }
   };
+
+  // Fetch Product Card Data, when page is mounted
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  useEffect;
 
   return (
     <>
@@ -91,10 +104,11 @@ const HomePage = () => {
             room into a conversation starter.
           </p>
         </div>
-
-        <Button onClick={fetchProducts}>Fetch Products</Button>
-
-        <div className="grid grid-cols-2 gap-4">{products}</div>
+        {productIsLoading ? (
+          <p>Loading...</p>
+        ) : (
+          <div className="grid grid-cols-2 gap-4">{productsList}</div>
+        )}
       </main>
     </>
   );

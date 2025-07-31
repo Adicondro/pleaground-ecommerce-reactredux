@@ -39,7 +39,7 @@ const LoginPage = () => {
       password: "",
     },
     resolver: zodResolver(loginFormSchema),
-    reValidateMode: "onChange"
+    reValidateMode: "onChange",
   });
 
   const handleLogin = (values) => {

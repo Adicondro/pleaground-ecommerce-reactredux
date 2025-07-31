@@ -1,9 +1,10 @@
 import React from "react";
 import { Button } from "./ui/button";
 import { IoIosAdd, IoIosRemove } from "react-icons/io";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
-const ProductCard = ({ imageUrl, altImage, name, price, stock }) => {
+const ProductCard = ({ imageUrl, altImage, name, price, stock, id }) => {
   // const { imageUrl, altImage, name, price, stock } = props;
 
   const [quantity, setQuantity] = useState(0);
@@ -20,22 +21,40 @@ const ProductCard = ({ imageUrl, altImage, name, price, stock }) => {
     }
   };
 
+  // // MOUNT
+  // useEffect(() => {
+  //   console.log("Component did mount");
+  // }, []);
+
+  // // UPDATE
+  // useEffect(() => {
+  //   console.log("Component did Update");
+  // }, [quantity]);
+
+  // useEffect(() => {
+  //   return () => {
+  //     alert("Component did Unmount");
+  //   };
+  // }, []);
+
   return (
     <div className="p-4 border rounded-md md:max-w-96 flex flex-col gap-4">
-      {/* Image */}
-      <div className="aspect-square w-full overflow-hidden">
-        <img className="w-full" src={imageUrl} alt={altImage} />
-      </div>
+      <Link to={"/product/" + id}>
+        {/* Image */}
+        <div className="aspect-square w-full overflow-hidden">
+          <img className="w-full" src={imageUrl} alt={altImage} />
+        </div>
+      </Link>
 
       {/* Product Name */}
-      <div>
+      <Link to={"/product/" + id}>
         <p className="text-md">{name}</p>
         <p className="text-xl font-semibold">
           Rp {price.toLocaleString("id-ID")}
         </p>
         <p className="text-muted-foreground">In stock: {stock}</p>
         <p></p>
-      </div>
+      </Link>
 
       {/* Quantity Button and Add to Cart */}
       <div className="flex flex-col gap-2">
@@ -63,9 +82,7 @@ const ProductCard = ({ imageUrl, altImage, name, price, stock }) => {
         </div>
         {/* Add to Cart */}
         <Button disabled={!Boolean(stock)} className="w-full">
-          {
-            stock > 0 ? "Add to cart" : "Out of stock"
-          }
+          {stock > 0 ? "Add to cart" : "Out of stock"}
         </Button>
       </div>
     </div>
