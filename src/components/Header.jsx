@@ -32,7 +32,9 @@ const Header = () => {
         <Separator orientation="vertical" className={"h-full"} />
 
         <div className="flex space-x-2">
-          <Button>Sign In</Button>
+          <Link to="/login">
+            <Button>Sign In</Button>
+          </Link>
           <Button variant="outline">Sign Up</Button>
         </div>
       </div>

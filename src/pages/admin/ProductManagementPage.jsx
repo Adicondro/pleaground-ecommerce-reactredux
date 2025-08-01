@@ -1,5 +1,11 @@
 import AdminLayout from "@/components/layout/AdminLayout";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+} from "@/components/ui/pagination";
 import {
   Table,
   TableHeader,
@@ -9,29 +15,67 @@ import {
   TableCell,
 } from "@/components/ui/table";
 import { axiosInstance } from "@/lib/axios";
-import { Ellipsis } from "lucide-react";
+import { Label } from "@radix-ui/react-label";
+import { ChevronLeft, ChevronRight, Ellipsis } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { IoAdd } from "react-icons/io5";
+import { useSearchParams } from "react-router-dom";
 
 const ProductManagementPage = () => {
   const [products, setProducts] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [productName, setProductName] = useState("");
+
+  const [hasNextPage, setHasNextPage] = useState(true);
+
+  const handleNextPage = () => {
+    searchParams.set("page", Number(searchParams.get("page")) + 1);
+
+    setSearchParams(searchParams);
+  };
+
+  const handlePreviousPage = () => {
+    searchParams.set("page", Number(searchParams.get("page")) - 1);
+
+    setSearchParams(searchParams);
+  };
 
   const fetchProducts = async () => {
     try {
       const response = await axiosInstance.get("/products", {
         params: {
-          _limit: 7,
+          _per_page: 7,
+          _page: Number(searchParams.get("page")),
+          name: searchParams.get("search")
         },
       });
 
-      setProducts(response.data);
+      setHasNextPage(Boolean(response.data.next));
+
+      setProducts(response.data.data);
     } catch (err) {
       console.log(err);
     }
   };
 
+  const searchProduct = () => {
+    searchParams.set("search", productName);
+
+    setSearchParams(searchParams);
+  };
+
   useEffect(() => {
-    fetchProducts();
+    if (searchParams.get("page")) {
+      fetchProducts();
+    }
+  }, [searchParams.get("page"), searchParams.get("search")]);
+
+  useEffect(() => {
+    if (!searchParams.get("page")) {
+      searchParams.set("page", 1);
+
+      setSearchParams(searchParams);
+    }
   }, []);
 
   return (
@@ -46,6 +90,18 @@ const ProductManagementPage = () => {
           </Button>
         }
       >
+        <div className="mb-8">
+          <Label>Search Product Name</Label>
+          <div className="flex gap-4">
+            <Input
+              value={productName}
+              onChange={(e) => setProductName(e.target.value)}
+              className="max-w-[400px]"
+              placeholder="Search Products..."
+            />
+            <Button onClick={searchProduct}>Search</Button>
+          </div>
+        </div>
         <Table className="p-4 border rounded-md">
           <TableHeader>
             <TableRow>
@@ -76,6 +132,36 @@ const ProductManagementPage = () => {
             })}
           </TableBody>
         </Table>
+
+        <Pagination className="mt-8">
+          <PaginationContent>
+            <PaginationItem>
+              <Button
+                disabled={searchParams.get("page") == 1}
+                onClick={handlePreviousPage}
+                variant="ghost"
+              >
+                <ChevronLeft className="w-6 h-6 mr-2" />
+                Previous
+              </Button>
+            </PaginationItem>
+
+            <PaginationItem className="mx-8 font-semibold">
+              Page {searchParams.get("page")}
+            </PaginationItem>
+
+            <PaginationItem>
+              <Button
+                disabled={!hasNextPage}
+                onClick={handleNextPage}
+                variant="ghost"
+              >
+                Next
+                <ChevronRight className="w-6 h-6 ml-2" />
+              </Button>
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
       </AdminLayout>
     </div>
   );
