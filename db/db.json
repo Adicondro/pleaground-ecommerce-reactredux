@@ -1,138 +1,138 @@
 {
-    "products": [
-      {
-        "id": 1,
-        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoFVoDMgB1hVanp6W49bZW2Y5JExq2AFV5Yg&s",
-        "altImage": "HEMLINGBY",
-        "name": "HEMLINGBY",
-        "price": 1995000,
-        "stock": 24   
-      },
-      {
-        "id": 2,
-        "imageUrl":
-          "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/772/0977232_PE813475_S3.jpg",
-        "altImage": "ADILS",
-        "name": "ADILS/LINNMON",
-        "price": 499000,
-        "stock": 10
-      },
-      {
-        "id": 3,
-        "imageUrl":
-          "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/438/1243810_PE920959_S4.jpg",
-        "altImage": "GRÖNSTA",
-        "name": "GRÖNSTA",
-        "price": 1495000,
-        "stock": 7
-      },
-      {
-        "id": 4,
-        "imageUrl":
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSL5Hdnh4JAJ5KO7kUEVQPs7MkNbYccvDJz-A&s",
-        "altImage": "ALEX/LAGKAPTEN",
-        "name": "ALEX/LAGKAPTEN",
-        "price": 2089000,
-        "stock": 4
-      },
-      {
-        "id": 5,
-        "imageUrl":
-          "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/465/0246565_PE385541_S5.jpg",
-        "altImage": "LACK",
-        "name": "LACK",
-        "price": 1299000,
-        "stock": 0
-      },
-      {
-        "id": 6,
-        "imageUrl":
-          "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/093/0609306_PE684440_S5.jpg",
-        "altImage": "TERTIAL",
-        "name": "TERTIAL",
-        "price": 149000,
-        "stock": 143
-      },
-      {
-        "id": 7,
-        "imageUrl":
-          "https://www.ikea.com/gb/en/images/products/smagoera-shelf-unit-white__0772937_pe756154_s5.jpg",
-        "altImage": "SMÅGÖRA",
-        "name": "SMÅGÖRA",
-        "price": 699000,
-        "stock": 12
-      },
-      {
-        "id": 8,
-        "imageUrl":
-          "https://www.ikea.com/au/en/images/products/eket-wall-mounted-cabinet-combination-white__0665955_pe713337_s5.jpg?f=xxs",
-        "altImage": "Cube wall shelves",
-        "name": "Cube wall shelves",
-        "price": 89000,
-        "stock": 127
-      },
-      {
-        "id": 9,
-        "imageUrl":
-          "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/207/1020773_PE835553_S5.jpg",
-        "altImage": "TROTTEN",
-        "name": "TROTTEN",
-        "price": 699000,
-        "stock": 64
-      },
-      {
-        "id": 10,
-        "imageUrl":
-          "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/595/1159544_PE888540_S5.webp",
-        "altImage": "ÅKERVINDEFLY",
-        "name": "ÅKERVINDEFLY",
-        "price": 249000,
-        "stock": 20
-      },
-      {
-        "id": 11,
-        "imageUrl":
-          "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/282/0728277_PE736167_S5.webp",
-        "altImage": "ADDE",
-        "name": "ADDE",
-        "price": 180000,
-        "stock": 4
-      },
-      {
-        "id": 12,
-        "imageUrl":
-          "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/912/0491298_PE624967_S5.webp",
-        "altImage": "BENGTHÅKAN",
-        "name": "BENGTHÅKAN",
-        "price": 625000,
-        "stock": 48
-      },
-      {
-        "id": 13,
-        "imageUrl":
-          "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/689/0668998_PE714812_S5.webp",
-        "altImage": "VIPPÄRT",
-        "name": "VIPPÄRT",
-        "price": 119000,
-        "stock": 12
-      },
-      {
-        "id": 14,
-        "imageUrl":
-          "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/600/1360003_PE954328_S4.webp",
-        "altImage": "TOSSBERG",
-        "name": "TOSSBERG",
-        "price": 34950000,
-        "stock": 30
-      },
-      {
-        "id": 15,
-        "imageUrl":
-          "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/660/0766047_PE753696_S5.webp",
-        "altImage": "VEDBO",
-        "name": "VEDBO",
-        "price": 2795000,
-        "stock": 4
-      }
-    ]
+  "products": [
+    {
+      "id": "1",
+      "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoFVoDMgB1hVanp6W49bZW2Y5JExq2AFV5Yg&s",
+      "altImage": "HEMLINGBY",
+      "name": "HEMLINGBY",
+      "price": 1995000,
+      "stock": 24
+    },
+    {
+      "id": "2",
+      "imageUrl": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/772/0977232_PE813475_S3.jpg",
+      "altImage": "ADILS",
+      "name": "ADILS/LINNMON",
+      "price": 499000,
+      "stock": 10
+    },
+    {
+      "id": "3",
+      "imageUrl": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/438/1243810_PE920959_S4.jpg",
+      "altImage": "GRÖNSTA",
+      "name": "GRÖNSTA",
+      "price": 1495000,
+      "stock": 7
+    },
+    {
+      "id": "4",
+      "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSL5Hdnh4JAJ5KO7kUEVQPs7MkNbYccvDJz-A&s",
+      "altImage": "ALEX/LAGKAPTEN",
+      "name": "ALEX/LAGKAPTEN",
+      "price": 2089000,
+      "stock": 4
+    },
+    {
+      "id": "5",
+      "imageUrl": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/465/0246565_PE385541_S5.jpg",
+      "altImage": "LACK",
+      "name": "LACK",
+      "price": 1299000,
+      "stock": 0
+    },
+    {
+      "id": "6",
+      "imageUrl": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/093/0609306_PE684440_S5.jpg",
+      "altImage": "TERTIAL",
+      "name": "TERTIAL",
+      "price": 149000,
+      "stock": 143
+    },
+    {
+      "id": "7",
+      "imageUrl": "https://www.ikea.com/gb/en/images/products/smagoera-shelf-unit-white__0772937_pe756154_s5.jpg",
+      "altImage": "SMÅGÖRA",
+      "name": "SMÅGÖRA",
+      "price": 699000,
+      "stock": 12
+    },
+    {
+      "id": "8",
+      "imageUrl": "https://www.ikea.com/au/en/images/products/eket-wall-mounted-cabinet-combination-white__0665955_pe713337_s5.jpg?f=xxs",
+      "altImage": "Cube wall shelves",
+      "name": "Cube wall shelves",
+      "price": 89000,
+      "stock": 127
+    },
+    {
+      "id": "9",
+      "imageUrl": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/207/1020773_PE835553_S5.jpg",
+      "altImage": "TROTTEN",
+      "name": "TROTTEN",
+      "price": 699000,
+      "stock": 64
+    },
+    {
+      "id": "10",
+      "imageUrl": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/595/1159544_PE888540_S5.webp",
+      "altImage": "ÅKERVINDEFLY",
+      "name": "ÅKERVINDEFLY",
+      "price": 249000,
+      "stock": 20
+    },
+    {
+      "id": "11",
+      "imageUrl": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/282/0728277_PE736167_S5.webp",
+      "altImage": "ADDE",
+      "name": "ADDE",
+      "price": 180000,
+      "stock": 4
+    },
+    {
+      "id": "12",
+      "imageUrl": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/912/0491298_PE624967_S5.webp",
+      "altImage": "BENGTHÅKAN",
+      "name": "BENGTHÅKAN",
+      "price": 625000,
+      "stock": 48
+    },
+    {
+      "id": "13",
+      "imageUrl": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/689/0668998_PE714812_S5.webp",
+      "altImage": "VIPPÄRT",
+      "name": "VIPPÄRT",
+      "price": 119000,
+      "stock": 12
+    },
+    {
+      "id": "14",
+      "imageUrl": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/600/1360003_PE954328_S4.webp",
+      "altImage": "TOSSBERG",
+      "name": "TOSSBERG",
+      "price": 34950000,
+      "stock": 30
+    },
+    {
+      "id": "15",
+      "imageUrl": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/660/0766047_PE753696_S5.webp",
+      "altImage": "VEDBO",
+      "name": "VEDBO",
+      "price": 2795000,
+      "stock": 4
+    },
+    {
+      "id": "464c",
+      "name": "MALM",
+      "price": 2399000,
+      "stock": 10,
+      "imageUrl": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/359/0735980_PE740314_S5.webp"
+    },
+    {
+      "id": "26d3",
+      "name": "TONSTAD",
+      "price": 1999000,
+      "stock": 12,
+      "imageUrl": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/298/1329846_PE945276_S5.webp"
+    }
+  ]
 }

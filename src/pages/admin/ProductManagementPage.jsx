@@ -19,7 +19,7 @@ import { Label } from "@radix-ui/react-label";
 import { ChevronLeft, ChevronRight, Ellipsis } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { IoAdd } from "react-icons/io5";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 const ProductManagementPage = () => {
   const [products, setProducts] = useState([]);
@@ -46,7 +46,7 @@ const ProductManagementPage = () => {
         params: {
           _per_page: 7,
           _page: Number(searchParams.get("page")),
-          name: searchParams.get("search")
+          name: searchParams.get("search"),
         },
       });
 
@@ -84,10 +84,12 @@ const ProductManagementPage = () => {
         title="Products Management"
         description="Managing our products"
         rightSection={
-          <Button>
-            <IoAdd className="h-6 w-6 mr-2" />
-            Add Product
-          </Button>
+          <Link to="/admin/products/create">
+            <Button>
+              <IoAdd className="h-6 w-6 mr-2" />
+              Add Product
+            </Button>
+          </Link>
         }
       >
         <div className="mb-8">
