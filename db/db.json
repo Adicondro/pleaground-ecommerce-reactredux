@@ -33,14 +33,6 @@
       "stock": 4
     },
     {
-      "id": "5",
-      "imageUrl": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/465/0246565_PE385541_S5.jpg",
-      "altImage": "LACK",
-      "name": "LACK",
-      "price": 1299000,
-      "stock": 0
-    },
-    {
       "id": "6",
       "imageUrl": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/093/0609306_PE684440_S5.jpg",
       "altImage": "TERTIAL",
@@ -55,14 +47,6 @@
       "name": "SMÅGÖRA",
       "price": 699000,
       "stock": 12
-    },
-    {
-      "id": "8",
-      "imageUrl": "https://www.ikea.com/au/en/images/products/eket-wall-mounted-cabinet-combination-white__0665955_pe713337_s5.jpg?f=xxs",
-      "altImage": "Cube wall shelves",
-      "name": "Cube wall shelves",
-      "price": 89000,
-      "stock": 127
     },
     {
       "id": "9",
@@ -126,13 +110,6 @@
       "price": 2399000,
       "stock": 10,
       "imageUrl": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/359/0735980_PE740314_S5.webp"
-    },
-    {
-      "id": "26d3",
-      "name": "TONSTAD",
-      "price": 1999000,
-      "stock": 12,
-      "imageUrl": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/298/1329846_PE945276_S5.webp"
     }
   ]
 }

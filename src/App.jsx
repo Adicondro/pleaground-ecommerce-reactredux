@@ -9,6 +9,7 @@ import LoginPage from "./pages/LoginPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import ProductManagementPage from "./pages/admin/ProductManagementPage";
 import CreateProductPage from "./pages/admin/CreateProductPage";
+import EditProductPage from "./pages/admin/EditProductPage";
 
 function App() {
   const location = useLocation();
@@ -26,6 +27,7 @@ function App() {
         <Route path="/admin">
           <Route path="products" Component={ProductManagementPage} />
           <Route path="products/create" Component={CreateProductPage} />
+          <Route path="products/edit/:productId" Component={EditProductPage} />
         </Route>
 
         <Route path="*" Component={NotFoundPage} />
