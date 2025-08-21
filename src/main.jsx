@@ -3,11 +3,18 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import { legacy_createStore } from "redux";
+import { reducers } from "./store/store";
+
+const globalStore = legacy_createStore(reducers);
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </StrictMode>
+  <Provider store={globalStore}>
+    <StrictMode>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </StrictMode>
+  </Provider>
 );
