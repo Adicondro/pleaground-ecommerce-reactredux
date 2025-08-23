@@ -24,31 +24,43 @@ import {
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { axiosInstance } from "@/lib/axios";
-import { useDispatch } from "react-redux";
 import GuestPage from "@/components/guard/GuestPage";
 
-const loginFormSchema = z.object({
-  username: z
-    .string()
-    .min(3, "Username has to be 3 characters or more")
-    .max(16, "Username has to be less than 16 characters"),
-  password: z.string().min(8, "Your password needs to be 8 characters or more"),
-});
+const registerFormSchema = z
+  .object({
+    username: z
+      .string()
+      .min(3, "Username has to be 3 characters or more")
+      .max(16, "Username has to be less than 16 characters"),
+    password: z
+      .string()
+      .min(8, "Your password needs to be 8 characters or more"),
+    repeatPassword: z
+      .string()
+      .min(8, "Your password needs to be 8 characters or more"),
+  })
+  .superRefine(({ password, repeatPassword }, ctx) => {
+    if (password !== repeatPassword) {
+      ctx.addIssue({
+        code: "custom",
+        message: "Passwords do not match",
+        path: ["repeatPassword"],
+      });
+    }
+  });
 
-const LoginPage = () => {
-  const [isChecked, setIsChecked] = useState(false);
-
-  const dispatch = useDispatch();
+const RegisterPage = () => {
   const form = useForm({
     defaultValues: {
       username: "",
       password: "",
+      repeatPassword: "",
     },
-    resolver: zodResolver(loginFormSchema),
+    resolver: zodResolver(registerFormSchema),
     reValidateMode: "onChange",
   });
 
-  const handleLogin = async (values) => {
+  const handleRegister = async (values) => {
     try {
       const userResponse = await axiosInstance.get("/users", {
         params: {
@@ -56,26 +68,18 @@ const LoginPage = () => {
         },
       });
 
-      if (
-        !userResponse.data.length ||
-        userResponse.data[0].password !== values.password
-      ) {
-        alert("Invalid credentials");
+      if (userResponse.data.length) {
+        alert("Username already taken");
         return;
       }
 
-      alert("Successfully logged in as " + userResponse.data[0].username);
-
-      dispatch({
-        type: "USER_LOGIN",
-        payload: {
-          username: userResponse.data[0].username,
-          id: userResponse.data[0].id,
-          role: userResponse.data[0].role,
-        },
+      await axiosInstance.post("/users", {
+        username: values.username,
+        password: values.password,
+        role: "user",
       });
 
-      localStorage.setItem("current-user", userResponse.data[0].id);
+      alert("User registered");
 
       form.reset();
     } catch (err) {
@@ -88,12 +92,12 @@ const LoginPage = () => {
       <main className="px-4 container py-8 flex flex-col justify-center max-w-screen items-center h-[80vh]">
         <Form {...form}>
           <form
-            onSubmit={form.handleSubmit(handleLogin)}
+            onSubmit={form.handleSubmit(handleRegister)}
             className="w-full max-w-[540px]"
           >
             <Card>
               <CardHeader>
-                <CardTitle>Welcome Back</CardTitle>
+                <CardTitle>Create an Account</CardTitle>
               </CardHeader>
               <CardContent className="flex flex-col gap-2">
                 <div>
@@ -121,10 +125,7 @@ const LoginPage = () => {
                       <FormItem>
                         <FormLabel>Password</FormLabel>
                         <FormControl>
-                          <Input
-                            {...field}
-                            type={isChecked ? "text" : "password"}
-                          />
+                          <Input {...field} type="password" />
                         </FormControl>
                         <FormDescription />
                         <FormMessage />
@@ -132,13 +133,21 @@ const LoginPage = () => {
                     )}
                   />
                 </div>
-
-                <div className="flex items-center space-x-2">
-                  <Checkbox
-                    onCheckedChange={(checked) => setIsChecked(checked)}
-                    id="show-password"
+                <div>
+                  <FormField
+                    control={form.control}
+                    name="repeatPassword"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Repeat Password</FormLabel>
+                        <FormControl>
+                          <Input {...field} type="password" />
+                        </FormControl>
+                        <FormDescription />
+                        <FormMessage />
+                      </FormItem>
+                    )}
                   />
-                  <Label htmlFor="show-password">Show Password</Label>
                 </div>
               </CardContent>
               <CardFooter>
@@ -155,4 +164,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage;

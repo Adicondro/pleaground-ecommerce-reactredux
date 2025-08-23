@@ -3,6 +3,7 @@ import AdminLayout from "@/components/layout/AdminLayout";
 import ProductForm from "@/components/forms/ProductForm";
 import { useNavigate, useParams } from "react-router-dom";
 import { axiosInstance } from "@/lib/axios";
+import AdminPage from "@/components/guard/AdminPage";
 
 const EditProductPage = () => {
   const [product, setProduct] = useState({

@@ -7,7 +7,6 @@ import ProductForm from "@/components/forms/ProductForm";
 const CreateProductPage = () => {
   const navigate = useNavigate();
 
-
   const handleCreateProduct = async (values) => {
     try {
       const response = await axiosInstance.post("/products", {
@@ -27,7 +26,7 @@ const CreateProductPage = () => {
 
   return (
     <AdminLayout title="Create Products" description="Add new products">
-      <ProductForm cardTitle="Add new product" onSubmit={handleCreateProduct}/>
+      <ProductForm cardTitle="Add new product" onSubmit={handleCreateProduct} />
     </AdminLayout>
   );
 };

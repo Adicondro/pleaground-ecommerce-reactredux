@@ -111,5 +111,19 @@
       "stock": 10,
       "imageUrl": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/359/0735980_PE740314_S5.webp"
     }
+  ],
+  "users": [
+    {
+      "id": "61ec",
+      "username": "user_test",
+      "password": "initest123",
+      "role": "user"
+    },
+    {
+      "id": "548f",
+      "username": "admin",
+      "password": "iniadmin123",
+      "role": "admin"
+    }
   ]
 }
