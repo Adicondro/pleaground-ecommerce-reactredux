@@ -56,7 +56,7 @@ const HomePage = () => {
             Bring timeless vibes home — our mid-century modern pieces turn every
             room into a conversation starter.
           </p>
-          <p>Counter: {counterSelector.count}</p>
+          {/* <p>Counter: {counterSelector.count}</p> */}
         </div>
         {productIsLoading ? (
           <p>Loading...</p>
