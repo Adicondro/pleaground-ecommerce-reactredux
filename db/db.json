@@ -125,5 +125,10 @@
       "password": "iniadmin123",
       "role": "admin"
     }
+  ],
+  "carts": [
+    {
+      
+    }
   ]
 }

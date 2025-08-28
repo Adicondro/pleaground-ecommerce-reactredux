@@ -10,7 +10,7 @@ import ProductDetailPage from "./pages/ProductDetailPage";
 import ProductManagementPage from "./pages/admin/ProductManagementPage";
 import CreateProductPage from "./pages/admin/CreateProductPage";
 import EditProductPage from "./pages/admin/EditProductPage";
-import CounterPage from "./pages/CounterPage";
+// import CounterPage from "./pages/CounterPage";
 import RegisterPage from "./pages/RegisterPage";
 import useHydration from "./hooks/useHydration";
 
@@ -33,7 +33,7 @@ function App() {
         <Route path="/cart" Component={CartPage} />
         <Route path="/login" Component={LoginPage}></Route>
         <Route path="/register" Component={RegisterPage}></Route>
-        <Route path="/counter" Component={CounterPage}></Route>
+        {/* <Route path="/counter" Component={CounterPage}></Route> */}
         <Route path="/product/:productId" Component={ProductDetailPage} />
 
         <Route path="/admin">

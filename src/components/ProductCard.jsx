@@ -81,7 +81,7 @@ const ProductCard = ({ imageUrl, altImage, name, price, stock, id }) => {
           </Button>
         </div>
         {/* Add to Cart */}
-        <Button disabled={!Boolean(stock)} className="w-full">
+        <Button disabled={!Boolean(stock) || quantity < 1} className="w-full">
           {stock > 0 ? "Add to cart" : "Out of stock"}
         </Button>
       </div>
