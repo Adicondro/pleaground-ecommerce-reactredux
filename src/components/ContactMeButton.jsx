@@ -1,13 +1,7 @@
-import React from "react";
-import { Button } from "./ui/button";
-
-const ContactMeButton = ({label, children}) => {
+export const ContactMeButton = (props) => {
   return (
-    <Button className="bg-gray-900 text-white p-2 rounded-md">
-      {/* {label} */}
-      {children}
-    </Button>
+    <button className="bg-gray-900 text-white p-2 rounded-md hover:bg-gray-700">
+      {props.children}
+    </button>
   );
 };
-
-export default ContactMeButton;

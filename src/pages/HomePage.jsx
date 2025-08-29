@@ -1,26 +1,25 @@
-import React, { useEffect } from "react";
-import ProductCard from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
+import { ProductCard } from "../components/ProductCard";
 import { axiosInstance } from "@/lib/axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const HomePage = () => {
   const [productIsLoading, setProductIsLoading] = useState(false);
   const [products, setProducts] = useState([]);
 
-  const userSelector = useSelector((state) => state.user)
-  const counterSelector = useSelector((state) => state.counter)
+  const userSelector = useSelector((state) => state.user);
+  const counterSelector = useSelector((state) => state.counter);
 
   const productsList = products.map((product) => {
     return (
       <ProductCard
         id={product.id}
         imageUrl={product.imageUrl}
-        altImage={product.altImage}
         name={product.name}
-        price={product.price}
         stock={product.stock}
+        price={product.price}
       />
     );
   });
@@ -29,6 +28,7 @@ const HomePage = () => {
     setProductIsLoading(true);
     try {
       const response = await axiosInstance.get("/products");
+
       console.log(response.data);
       setProducts(response.data);
     } catch (err) {
@@ -38,26 +38,24 @@ const HomePage = () => {
     }
   };
 
-  // Fetch Product Card Data, when page is mounted
+  // fetch products data once, when home page is first mounted
   useEffect(() => {
     fetchProducts();
   }, []);
-
-  useEffect;
 
   return (
     <>
       <main className="min-h-[80vh] max-w-screen-md mx-auto px-4 mt-8">
         <div className="pb-20 mx-auto text-center flex flex-col items-center max-w-3xl">
           <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-            Become a trend-setter with us. {/* {userSelector.email} */}
+            Become a trend-setter with us
           </h1>
           <p className="mt-6 text-lg max-w-prose text-muted-foreground">
             Bring timeless vibes home — our mid-century modern pieces turn every
             room into a conversation starter.
           </p>
-          {/* <p>Counter: {counterSelector.count}</p> */}
         </div>
+
         {productIsLoading ? (
           <p>Loading...</p>
         ) : (

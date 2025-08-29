@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Minus, Plus } from "lucide-react";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const CounterPage = () => {
@@ -26,7 +26,9 @@ const CounterPage = () => {
   const setCounterWithInput = () => {
     dispatch({
       type: "COUNTER_SET_COUNT",
-      payload: countInput,
+      payload: {
+        newCount: countInput,
+      },
     });
   };
 

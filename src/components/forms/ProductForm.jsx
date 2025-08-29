@@ -1,12 +1,12 @@
-import React from "react";
-import { Button } from "@/components/ui/button";
+import { useForm } from "react-hook-form";
+import { Button } from "../ui/button";
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "../ui/card";
 import {
   Form,
   FormControl,
@@ -15,10 +15,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+} from "../ui/form";
+import { Input } from "../ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 const productFormSchema = z.object({
@@ -26,12 +25,12 @@ const productFormSchema = z.object({
     .string()
     .min(3, "Your product name is under 3 characters")
     .max(80, "Your product name is over 80 characters"),
-  price: z.coerce.number().min(10000, "Price cannot be under Rp 10.0000"),
+  price: z.coerce.number().min(10000, "Price cannot be under Rp 10.000"),
   stock: z.coerce.number().min(1, "Stock cannot be under 1"),
   imageUrl: z.string().url("Use a valid URL"),
 });
 
-const ProductForm = (props) => {
+export const ProductForm = (props) => {
   const {
     onSubmit,
     cardTitle,
@@ -40,6 +39,7 @@ const ProductForm = (props) => {
     defaultStock,
     defaultImageUrl,
   } = props;
+
   const form = useForm({
     defaultValues: {
       name: defaultName || "",
@@ -58,10 +58,9 @@ const ProductForm = (props) => {
       >
         <Card>
           <CardHeader>
-            <CardTitle>{cardTitle}</CardTitle>
+            <CardTitle className="font-bold">{cardTitle}</CardTitle>
           </CardHeader>
           <CardContent className="flex flex-col gap-2">
-            {/* Name */}
             <FormField
               control={form.control}
               name="name"
@@ -78,8 +77,6 @@ const ProductForm = (props) => {
                 </FormItem>
               )}
             />
-            {/* Price */}
-
             <FormField
               control={form.control}
               name="price"
@@ -89,13 +86,10 @@ const ProductForm = (props) => {
                   <FormControl>
                     <Input type="number" {...field} />
                   </FormControl>
-                  <FormDescription />
                   <FormMessage />
                 </FormItem>
               )}
             />
-
-            {/* Stock */}
             <FormField
               control={form.control}
               name="stock"
@@ -105,12 +99,10 @@ const ProductForm = (props) => {
                   <FormControl>
                     <Input type="number" {...field} />
                   </FormControl>
-                  <FormDescription />
                   <FormMessage />
                 </FormItem>
               )}
             />
-            {/* Image URL */}
             <FormField
               control={form.control}
               name="imageUrl"
@@ -120,7 +112,9 @@ const ProductForm = (props) => {
                   <FormControl>
                     <Input {...field} />
                   </FormControl>
-                  <FormDescription>Please use a valid URL</FormDescription>
+                  <FormDescription>
+                    Please use a valid image URL
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -136,5 +130,3 @@ const ProductForm = (props) => {
     </Form>
   );
 };
-
-export default ProductForm;

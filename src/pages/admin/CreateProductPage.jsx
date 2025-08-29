@@ -1,22 +1,21 @@
-import AdminLayout from "@/components/layout/AdminLayout";
+import { AdminLayout } from "@/components/layout/AdminLayout";
 import { axiosInstance } from "@/lib/axios";
-import React from "react";
 import { useNavigate } from "react-router-dom";
-import ProductForm from "@/components/forms/ProductForm";
+import { ProductForm } from "@/components/forms/ProductForm";
 
 const CreateProductPage = () => {
   const navigate = useNavigate();
 
   const handleCreateProduct = async (values) => {
     try {
-      const response = await axiosInstance.post("/products", {
+      await axiosInstance.post("/products", {
         name: values.name,
         price: values.price,
         stock: values.stock,
         imageUrl: values.imageUrl,
       });
 
-      alert("Product Created");
+      alert("Product created");
 
       navigate("/admin/products");
     } catch (err) {
@@ -26,7 +25,10 @@ const CreateProductPage = () => {
 
   return (
     <AdminLayout title="Create Products" description="Add new products">
-      <ProductForm cardTitle="Add new product" onSubmit={handleCreateProduct} />
+      <ProductForm
+        cardTitle="Add a new product"
+        onSubmit={handleCreateProduct}
+      />
     </AdminLayout>
   );
 };

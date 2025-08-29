@@ -1,22 +1,22 @@
-import React from "react";
 import HomePage from "./pages/HomePage";
-import CartPage from "./pages/CartPage";
 import { Routes, Route, useLocation } from "react-router-dom";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import CartPage from "./pages/CartPage";
+import { Header } from "./components/Header";
+import { Footer } from "./components/Footer";
 import NotFoundPage from "./pages/NotFoundPage";
 import LoginPage from "./pages/LoginPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import ProductManagementPage from "./pages/admin/ProductManagementPage";
 import CreateProductPage from "./pages/admin/CreateProductPage";
 import EditProductPage from "./pages/admin/EditProductPage";
-// import CounterPage from "./pages/CounterPage";
+import CounterPage from "./pages/CounterPage";
 import RegisterPage from "./pages/RegisterPage";
-import useHydration from "./hooks/useHydration";
+import { useHydration } from "./hooks/useHydration";
+import HistoryPage from "./pages/HistoryPage";
+import HistoryDetailPage from "./pages/HistoryDetailPage";
 
 function App() {
   const location = useLocation();
-
 
   const { isHydrated } = useHydration();
 
@@ -31,9 +31,11 @@ function App() {
       <Routes>
         <Route path="/" Component={HomePage} />
         <Route path="/cart" Component={CartPage} />
-        <Route path="/login" Component={LoginPage}></Route>
-        <Route path="/register" Component={RegisterPage}></Route>
-        {/* <Route path="/counter" Component={CounterPage}></Route> */}
+        <Route path="/login" Component={LoginPage} />
+        <Route path="/register" Component={RegisterPage} />
+        <Route path="/counter" Component={CounterPage} />
+        <Route path="/history" Component={HistoryPage} />
+        <Route path="/history/:transactionId" Component={HistoryDetailPage} />
         <Route path="/product/:productId" Component={ProductDetailPage} />
 
         <Route path="/admin">

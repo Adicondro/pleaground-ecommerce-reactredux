@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from "react";
-import AdminLayout from "@/components/layout/AdminLayout";
-import ProductForm from "@/components/forms/ProductForm";
-import { useNavigate, useParams } from "react-router-dom";
+import { ProductForm } from "@/components/forms/ProductForm";
+import { AdminLayout } from "@/components/layout/AdminLayout";
 import { axiosInstance } from "@/lib/axios";
-import AdminPage from "@/components/guard/AdminPage";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 const EditProductPage = () => {
   const [product, setProduct] = useState({
-    id: 0,
-    imageUrl: "",
-    altImage: "",
     name: "",
     price: 0,
+    imageUrl: "",
     stock: 0,
+    id: 0,
   });
+
   const params = useParams();
 
   const navigate = useNavigate();
@@ -37,7 +36,7 @@ const EditProductPage = () => {
         imageUrl: values.imageUrl,
       });
 
-      alert("Product Updated");
+      alert("Product edited");
 
       navigate("/admin/products");
     } catch (err) {
@@ -50,14 +49,11 @@ const EditProductPage = () => {
   }, []);
 
   return (
-    <AdminLayout
-      title={"Editing " + product.name}
-      description="Editing product"
-    >
+    <AdminLayout title="Edit Product" description="Editing product">
       {product.id ? (
         <ProductForm
+          cardTitle={"Editing " + product.name}
           onSubmit={handleEditProduct}
-          cardTitle="Edit Product"
           defaultName={product.name}
           defaultPrice={product.price}
           defaultStock={product.stock}

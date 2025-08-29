@@ -1,43 +1,38 @@
-import React from "react";
+import { Button } from "@/components/ui/button";
 import {
   Card,
-  CardHeader,
-  CardTitle,
   CardContent,
   CardFooter,
+  CardHeader,
+  CardTitle,
 } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   Form,
-  FormDescription,
   FormItem,
   FormMessage,
   FormLabel,
   FormField,
   FormControl,
+  FormDescription,
 } from "@/components/ui/form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { axiosInstance } from "@/lib/axios";
-import GuestPage from "@/components/guard/GuestPage";
+import { GuestPage } from "@/components/guard/GuestPage";
 
 const registerFormSchema = z
   .object({
     username: z
       .string()
-      .min(3, "Username has to be 3 characters or more")
-      .max(16, "Username has to be less than 16 characters"),
-    password: z
-      .string()
-      .min(8, "Your password needs to be 8 characters or more"),
-    repeatPassword: z
-      .string()
-      .min(8, "Your password needs to be 8 characters or more"),
+      .min(3, "Your username is under 3 characters")
+      .max(16, "Your username is over 16 characters"),
+    password: z.string().min(8, "Your password is under 8 characters"),
+    repeatPassword: z.string().min(8, "Your password is under 8 characters"),
   })
   .superRefine(({ password, repeatPassword }, ctx) => {
     if (password !== repeatPassword) {
@@ -57,7 +52,7 @@ const RegisterPage = () => {
       repeatPassword: "",
     },
     resolver: zodResolver(registerFormSchema),
-    reValidateMode: "onChange",
+    reValidateMode: "onSubmit",
   });
 
   const handleRegister = async (values) => {
@@ -89,7 +84,7 @@ const RegisterPage = () => {
 
   return (
     <GuestPage>
-      <main className="px-4 container py-8 flex flex-col justify-center max-w-screen items-center h-[80vh]">
+      <main className="px-4 container py-8 flex flex-col justify-center items-center max-w-screen-md h-[80vh]">
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(handleRegister)}
@@ -97,63 +92,66 @@ const RegisterPage = () => {
           >
             <Card>
               <CardHeader>
-                <CardTitle>Create an Account</CardTitle>
+                <CardTitle>Create an account!</CardTitle>
               </CardHeader>
               <CardContent className="flex flex-col gap-2">
-                <div>
-                  <FormField
-                    control={form.control}
-                    name="username"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Username</FormLabel>
-                        <FormControl>
-                          <Input {...field} />
-                        </FormControl>
-                        <FormDescription />
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
+                <FormField
+                  control={form.control}
+                  name="username"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Username</FormLabel>
+                      <FormControl>
+                        <Input {...field} />
+                      </FormControl>
+                      <FormDescription>
+                        Username has to be between 3 and 16 characters
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-                <div>
-                  <FormField
-                    control={form.control}
-                    name="password"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Password</FormLabel>
-                        <FormControl>
-                          <Input {...field} type="password" />
-                        </FormControl>
-                        <FormDescription />
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-                <div>
-                  <FormField
-                    control={form.control}
-                    name="repeatPassword"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Repeat Password</FormLabel>
-                        <FormControl>
-                          <Input {...field} type="password" />
-                        </FormControl>
-                        <FormDescription />
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
+                <FormField
+                  control={form.control}
+                  name="password"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Password</FormLabel>
+                      <FormControl>
+                        <Input {...field} type="password" />
+                      </FormControl>
+                      <FormDescription>
+                        Password has to be 8 characters or more
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="repeatPassword"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Repeat Password</FormLabel>
+                      <FormControl>
+                        <Input {...field} type="password" />
+                      </FormControl>
+                      <FormDescription>
+                        Make sure your passwords match
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
               </CardContent>
               <CardFooter>
                 <div className="flex flex-col space-y-4 w-full">
-                  <Button disabled={!form.formState.isValid}>Login</Button>
-                  <Button variant="link">Sign up instead</Button>
+                  <Button type="submit">Register</Button>
+                  <Button variant="link" className="w-full">
+                    Log in instead
+                  </Button>
                 </div>
               </CardFooter>
             </Card>

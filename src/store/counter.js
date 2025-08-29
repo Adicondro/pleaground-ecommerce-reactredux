@@ -18,7 +18,7 @@ export const counterReducer = (state = DEFAULT_STATE, action) => {
   } else if (action.type === "COUNTER_SET_COUNT") {
     const dupState = { ...state };
 
-    dupState.count = action.payload;
+    dupState.count = action.payload.newCount;
 
     return dupState;
   }

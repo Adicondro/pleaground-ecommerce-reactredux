@@ -1,10 +1,11 @@
 import { axiosInstance } from "@/lib/axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
-const useHydration = () => {
-  const [isHydrated, setIsHydrated] = useState(false);
+export const useHydration = () => {
   const dispatch = useDispatch();
+
+  const [isHydrated, setIsHydrated] = useState(false);
 
   const hydrateAuth = async () => {
     try {
@@ -37,5 +38,3 @@ const useHydration = () => {
     isHydrated,
   };
 };
-
-export default useHydration;

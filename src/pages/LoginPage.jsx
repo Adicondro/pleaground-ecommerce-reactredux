@@ -1,52 +1,52 @@
-import React from "react";
+import { Button } from "@/components/ui/button";
 import {
   Card,
-  CardHeader,
-  CardTitle,
   CardContent,
   CardFooter,
+  CardHeader,
+  CardTitle,
 } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   Form,
-  FormDescription,
   FormItem,
   FormMessage,
   FormLabel,
   FormField,
   FormControl,
+  FormDescription,
 } from "@/components/ui/form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { axiosInstance } from "@/lib/axios";
 import { useDispatch } from "react-redux";
-import GuestPage from "@/components/guard/GuestPage";
+import { GuestPage } from "@/components/guard/GuestPage";
 
 const loginFormSchema = z.object({
   username: z
     .string()
-    .min(3, "Username has to be 3 characters or more")
-    .max(16, "Username has to be less than 16 characters"),
-  password: z.string().min(8, "Your password needs to be 8 characters or more"),
+    .min(3, "Your username is under 3 characters")
+    .max(16, "Your username is over 16 characters"),
+  password: z.string().min(8, "Your password is under 8 characters"),
 });
 
 const LoginPage = () => {
-  const [isChecked, setIsChecked] = useState(false);
-
   const dispatch = useDispatch();
+
   const form = useForm({
     defaultValues: {
       username: "",
       password: "",
     },
     resolver: zodResolver(loginFormSchema),
-    reValidateMode: "onChange",
+    reValidateMode: "onSubmit",
   });
+
+  const [isChecked, setIsChecked] = useState(false);
 
   const handleLogin = async (values) => {
     try {
@@ -85,7 +85,7 @@ const LoginPage = () => {
 
   return (
     <GuestPage>
-      <main className="px-4 container py-8 flex flex-col justify-center max-w-screen items-center h-[80vh]">
+      <main className="px-4 container py-8 flex flex-col justify-center items-center max-w-screen-md h-[80vh]">
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(handleLogin)}
@@ -93,45 +93,45 @@ const LoginPage = () => {
           >
             <Card>
               <CardHeader>
-                <CardTitle>Welcome Back</CardTitle>
+                <CardTitle>Welcome Back!</CardTitle>
               </CardHeader>
               <CardContent className="flex flex-col gap-2">
-                <div>
-                  <FormField
-                    control={form.control}
-                    name="username"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Username</FormLabel>
-                        <FormControl>
-                          <Input {...field} />
-                        </FormControl>
-                        <FormDescription />
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
+                <FormField
+                  control={form.control}
+                  name="username"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Username</FormLabel>
+                      <FormControl>
+                        <Input {...field} />
+                      </FormControl>
+                      <FormDescription>
+                        Username has to be between 3 and 16 characters
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-                <div>
-                  <FormField
-                    control={form.control}
-                    name="password"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Password</FormLabel>
-                        <FormControl>
-                          <Input
-                            {...field}
-                            type={isChecked ? "text" : "password"}
-                          />
-                        </FormControl>
-                        <FormDescription />
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
+                <FormField
+                  control={form.control}
+                  name="password"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Password</FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          type={isChecked ? "text" : "password"}
+                        />
+                      </FormControl>
+                      <FormDescription>
+                        Password has to be 8 characters or more
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
                 <div className="flex items-center space-x-2">
                   <Checkbox
@@ -143,8 +143,10 @@ const LoginPage = () => {
               </CardContent>
               <CardFooter>
                 <div className="flex flex-col space-y-4 w-full">
-                  <Button disabled={!form.formState.isValid}>Login</Button>
-                  <Button variant="link">Sign up instead</Button>
+                  <Button type="submit">Login</Button>
+                  <Button variant="link" className="w-full">
+                    Sign up instead
+                  </Button>
                 </div>
               </CardFooter>
             </Card>

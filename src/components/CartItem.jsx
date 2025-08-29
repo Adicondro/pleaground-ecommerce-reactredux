@@ -1,40 +1,100 @@
-import React from "react";
-import { Button } from "./ui/button";
 import { IoIosAdd, IoIosRemove } from "react-icons/io";
-import { IoCheckmark } from "react-icons/io5";
+import { Button } from "./ui/button";
+import { IoCheckmark, IoClose } from "react-icons/io5";
+import { axiosInstance } from "@/lib/axios";
+import { useSelector } from "react-redux";
+import { fetchCart } from "@/services/cartService";
+import { useEffect, useState } from "react";
+import { useDebouncedCallback } from "use-debounce";
 
-const CartItem = (props) => {
-  const { imageUrl, name, price } = props;
+export const CartItem = (props) => {
+  const userSelector = useSelector((state) => state.user);
+
+  const [quantity, setQuantity] = useState(props.quantity);
+
+  const debouncedUpdateCart = useDebouncedCallback(() => {
+    updateCartQuantity();
+  }, 2000);
+
+  const removeCartItem = async () => {
+    try {
+      await axiosInstance.delete("/carts/" + props.cartId);
+      fetchCart(userSelector.id);
+      alert("Item removed");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const updateCartQuantity = async () => {
+    try {
+      await axiosInstance.patch("/carts/" + props.cartId, {
+        quantity: quantity,
+      });
+      fetchCart(userSelector.id);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    debouncedUpdateCart();
+  }, [quantity]);
 
   return (
     <div className="flex gap-4">
       <div className="aspect-square w-full overflow-hidden rounded-md max-w-52">
-        <img src={imageUrl} alt={name} className="w-full" />
+        <img src={props.imageUrl} alt={props.name} className="w-full" />
       </div>
 
       <div className="flex flex-col justify-between w-full">
         <div className="flex flex-col">
-          <p>{name}</p>
-          <p className="font-bold">Rp {price.toLocaleString("id-ID")}</p>
+          <p>{props.name}</p>
+          <p className="font-bold">Rp {props.price.toLocaleString("id-ID")}</p>
         </div>
 
         <div className="flex items-center gap-3">
-          <Button variant="ghost" size="icon">
+          <Button
+            disabled={quantity < 2}
+            onClick={() => setQuantity(quantity - 1)}
+            variant="ghost"
+            size="icon"
+          >
             <IoIosRemove className="w-4 h-4" />
           </Button>
-          <p className="text-lg font-bold">1</p>
-          <Button variant="ghost" size="icon">
-            <IoIosAdd className="h-4 w-4" />
+          <p className="text-lg font-bold">{quantity}</p>
+          <Button
+            disabled={quantity >= props.stock}
+            onClick={() => setQuantity(quantity + 1)}
+            variant="ghost"
+            size="icon"
+          >
+            <IoIosAdd className="w-4 h-4" />
           </Button>
         </div>
 
         <div className="flex justify-between w-full">
           <div className="flex gap-2 items-center">
-            <IoCheckmark className="text-green-500 h-6 w-6" />
-            <span className="text-sm text-muted-foreground">Available</span>
+            {props.stock < props.quantity ? (
+              <>
+                <IoClose className="text-red-500 h-6 w-6" />
+                <span className="text-sm text-muted-foreground">
+                  Not Available
+                </span>
+              </>
+            ) : (
+              <>
+                <IoCheckmark className="text-green-500 h-6 w-6" />
+                <span className="text-sm text-muted-foreground">Available</span>
+              </>
+            )}
           </div>
 
-          <Button className="text-destructive" variant="link">
+          <Button
+            onClick={removeCartItem}
+            className="text-destructive"
+            variant="link"
+          >
             Remove Item
           </Button>
         </div>
@@ -42,5 +102,3 @@ const CartItem = (props) => {
     </div>
   );
 };
-
-export default CartItem;
